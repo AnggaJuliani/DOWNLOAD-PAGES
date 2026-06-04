@@ -1,40 +1,43 @@
-for(let i=0;i<40;i++){
+const glow = document.getElementById("cursor-glow");
 
-const p=document.createElement("div");
+document.addEventListener("mousemove",(e)=>{
+
+glow.style.left=e.clientX+"px";
+glow.style.top=e.clientY+"px";
+
+});
+
+for(let i=0;i<80;i++){
+
+let p=document.createElement("div");
 
 p.style.position="fixed";
-p.style.width="4px";
-p.style.height="4px";
-
-p.style.background="red";
+p.style.width="3px";
+p.style.height="3px";
 
 p.style.borderRadius="50%";
+
+p.style.background="#ff003c";
+
+p.style.boxShadow="0 0 10px #ff003c";
 
 p.style.left=Math.random()*100+"vw";
 p.style.top=Math.random()*100+"vh";
 
-p.style.opacity=Math.random();
-
-p.style.boxShadow="0 0 10px red";
-
 document.body.appendChild(p);
 
-animate(p);
-}
-
-function animate(el){
-
-let y=Math.random()*window.innerHeight;
+let speed=Math.random()*2+0.5;
 
 setInterval(()=>{
 
-y-=1;
+let top=parseFloat(p.style.top);
 
-if(y<0){
-y=window.innerHeight;
-}
+top-=speed;
 
-el.style.top=y+"px";
+if(top<0)
+top=window.innerHeight;
+
+p.style.top=top+"px";
 
 },30);
 }
